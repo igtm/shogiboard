@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <title>ShogiBoard</title>
+  <style>
+    .container {
+      width: 100%
+    }
+
+    .main-wrap {
+      display: grid;
+      grid-template-areas: '. . main . .';
+      --main-max-width: 1300px;
+      grid-template-columns: var(--main-margin) 1fr minmax(auto, var(--main-max-width)) 1fr var(--main-margin);
+      margin-top: var(--site-header-margin);
+    }
+
+    main {
+      grid-area: main;
+      height: 853px;
+    }
+
+    .shogiboard-main {
+      display: grid;
+      grid-template-columns: 300px 800px 300px;
+      grid-template-rows: 320px 213px 320px;
+    }
+
+    .shogiboard {
+      position: relative;
+      margin: auto;
+      background-image: url('/resources/boards/board.jpg');
+      background-repeat: no-repeat;
+      background-size: contain;
+      height: 853px;
+      width: 800px;
+    }
+
+    .board-inner {
+      display: table;
+      table-layout: fixed;
+      margin: 42px 42px 50px 42px;
+      width: calc(100% - 84px);
+      height: calc(100% - 90px);
+    }
+
+    .board-row {
+      display: table-row;
+      width: 100%;
+    }
+
+    .board-row>div {
+      display: table-cell;
+      width: 80px;
+      height: 80px;
+    }
+
+    .piece-stand-black {
+      position: relative;
+      background-image: url('/resources/boards/piece-stand.jpg');
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 300px;
+      height: 320px;
+      grid-row: 3;
+      grid-column: 3;
+    }
+
+    .piece-stand-white {
+      position: relative;
+      background-image: url('/resources/boards/piece-stand.jpg');
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 300px;
+      height: 320px;
+
+    }
+
+    .piece-bk {
+      margin: auto;
+      background-image: url('/resources/pieces/sgl01.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 76px;
+      height: 76px;
+    }
+  </style>
+  <script>
+    /***** ドラッグ開始時の処理 *****/
+    function f_dragstart(event) {
+      //ドラッグするデータのid名をDataTransferオブジェクトにセット
+      event.dataTransfer.setData("text", event.target.id);
+    }
+
+    /***** ドラッグ要素がドロップ要素に重なっている間の処理 *****/
+    function f_dragover(event) {
+      //dragoverイベントをキャンセルして、ドロップ先の要素がドロップを受け付けるようにする
+      event.preventDefault();
+    }
+
+    /***** ドロップ時の処理 *****/
+    function f_drop(event) {
+      //ドラッグされたデータのid名をDataTransferオブジェクトから取得
+      var id_name = event.dataTransfer.getData("text");
+      //id名からドラッグされた要素を取得
+      var drag_elm = document.getElementById(id_name);
+      //ドロップ先にドラッグされた要素を追加
+      event.currentTarget.appendChild(drag_elm);
+      //エラー回避のため、ドロップ処理の最後にdropイベントをキャンセルしておく
+      event.preventDefault();
+    }
+  </script>
+</head>
+
+<body>
+  <div class="main-wrap">
+    <main class="shogiboard-main">
+      <div class="piece-stand-white"></div>
+      <div class="shogiboard">
+        <div class="board-inner">
+          <div class="board-row">
+            <div id="cell-91" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-81" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-71" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-61" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-51" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-41" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-31" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-21" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-11" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+          </div>
+          <div class="board-row">
+            <div id="cell-92" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-82" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-72" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-62" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-52" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-42" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-32" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-22" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-12" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+          </div>
+          <div class="board-row">
+            <div id="cell-93" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-83" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-73" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-63" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-53" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-43" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-33" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-23" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-13" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+          </div>
+          <div class="board-row">
+            <div id="cell-94" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-84" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-74" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-64" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-54" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-44" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-34" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-24" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-14" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+          </div>
+          <div class="board-row">
+            <div id="cell-95" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-85" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-75" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-65" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-55" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-45" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-35" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-25" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-15" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+          </div>
+          <div class="board-row">
+            <div id="cell-96" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-86" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-76" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-66" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-56" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-46" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-36" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-26" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-16" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+          </div>
+          <div class="board-row">
+            <div id="cell-97" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-87" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-77" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-67" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-57" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-47" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-37" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-27" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-17" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+          </div>
+          <div class="board-row">
+            <div id="cell-98" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-88" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-78" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-68" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-58" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-48" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-38" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-28" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-18" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+          </div>
+          <div class="board-row">
+            <div id="cell-99" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-89" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-79" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-69" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-59" ondragover="f_dragover(event)" ondrop="f_drop(event)">
+              <div id="piece-bk" class="piece-bk" draggable="true" ondragstart="f_dragstart(event)"></div>
+            </div>
+            <div id="cell-49" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-39" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-29" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+            <div id="cell-19" ondragover="f_dragover(event)" ondrop="f_drop(event)"></div>
+          </div>
+        </div>
+      </div>
+      <div class="piece-stand-black"></div>
+    </main>
+  </div>
+</body>
+
+</html>

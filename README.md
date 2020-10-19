@@ -17,3 +17,8 @@ app.run()
 TBD
 esbuild でやる予定
 ```
+
+
+# Reference
+
+- [将棋盤駒画像](http://sozai.7gates.net/info/kiyaku.html)
