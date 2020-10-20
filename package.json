@@ -8,6 +8,6 @@
     "esbuild": "^0.7.15"
   },
   "scripts": {
-    "start": "cd static && npx static-server"
+    "start": "cd docs && npx static-server"
   }
 }

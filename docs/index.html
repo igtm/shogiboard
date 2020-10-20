@@ -90,6 +90,14 @@
     }
   </style>
   <script>
+    //指し手のSE
+    var seMove = new Audio();
+    seMove.type = "audio/mpeg";
+    seMove.preload = "auto";
+    seMove.crossOrigin = 'anonymous';
+    seMove.src = './resources/se/move.mp3';
+    seMove.load();
+
     /***** ドラッグ開始時の処理 *****/
     function f_dragstart(event) {
       //ドラッグするデータのid名をDataTransferオブジェクトにセット
@@ -112,6 +120,9 @@
       event.currentTarget.appendChild(drag_elm);
       //エラー回避のため、ドロップ処理の最後にdropイベントをキャンセルしておく
       event.preventDefault();
+
+      seMove.currentTime = 0
+      seMove.play().then(e => console.log(e)).catch(e => console.log(e));  // 再生
     }
   </script>
 </head>
